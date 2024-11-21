@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gildenmitglieder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1e1e2f;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 2.5rem;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+            color: #ffffff;
+        }
+        th, td {
+            border: 1px solid #ffffff;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff4500;
+        }
+        tr:nth-child(even) {
+            background-color: #2e2e40;
+        }
+        tr:hover {
+            background-color: #3f3f55;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ff4500;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        .form-container {
+            margin: 20px;
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+    </style>
+    <script>
+        let members = [
+
+            {
+                name: "Wiesel",
+                berechtigt: "Ja",
+                items: "Gewaltiger Zweihänder von Adentus, Nirmas Echoschwert, Panzerhandschuhe des Feldgenerals"
+            },
+    
+            {
+                name: "JuppTheGreat",
+                berechtigt: "Ja",
+                items: "Umarmung des Abkehrers, Eisenschuhe des Stoßkommandanten, Hose des Aufgestiegenen Wächters"
+            },
+    
+            {
+                name: "Yoria",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Visir des Stoßkommandanten, Eisenschuhe des Stoßkommandanten"
+            },
+    
+            {
+                name: "Smokinggun",
+                berechtigt: "Ja",
+                items: "Gewaltiger Zweihänder von Adentus"
+            },
+    
+            {
+                name: "Kuro88",
+                berechtigt: "Ja",
+                items: "Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Charaktername",
+                berechtigt: "Ja",
+                items: "Phantomwolf-Maske"
+            },
+    
+            {
+                name: "Narah",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Schattenpflücker-Hose, Umarmung des Abkehrers, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Moe",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Schattenpflücker Maske, Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Nelliel",
+                berechtigt: "Ja",
+                items: "Schattenpflücker Maske, Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Fabfrucht",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Phantomwolf-Maske, Umarmung des Abkehrers, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Wotan1988",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Umarmung des Abkehrers, Nirmas Echoschwert, Panzerhandschuhe des Feldgenerals"
+            },
+    
+            {
+                name: "Fateles",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Eisenschuhe des Stoßkommandanten, Nirmas Echoschwert, Panzerhandschuhe des Feldgenerals"
+            },
+    
+            {
+                name: "Anubis",
+                berechtigt: "Ja",
+                items: "Hose des Aufgestiegenen Wächters"
+            },
+    
+            {
+                name: "Falleen DD",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Schattenpflücker Maske, Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Undomiel",
+                berechtigt: "Ja",
+                items: "Visir des Stoßkommandanten, Umarmung des Abkehrers, Hose des Aufgestiegenen Wächters, Blutdurstgürtel"
+            },
+    
+            {
+                name: "SVN68",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Panzerhandschuhe des Feldgenerals"
+            },
+    
+            {
+                name: "Rubinstein84",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Schattenpflücker-Hose, Knorriger Leerstab des Aridus"
+            },
+    
+            {
+                name: "Sadori",
+                berechtigt: "Ja",
+                items: "Phantomwolf-Maske, Blutdurstgürtel"
+            },
+    
+            {
+                name: "TctNarga",
+                berechtigt: "Ja",
+                items: "Schattenpflücker Maske, Schattenpflücker-Hose, Panzerhandschuhe des Feldgenerals, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Varccas",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Schattenpflücker Maske, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Shankz",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Eisenschuhe des Stoßkommandanten, Nirmas Echoschwert, Panzerhandschuhe des Feldgenerals"
+            },
+    
+            {
+                name: "Acidwars",
+                berechtigt: "Ja",
+                items: "Phantomwolf-Maske, Umarmung des Abkehrers, Kleidung des Aufgestiegenen Wächters, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Demolux",
+                berechtigt: "Ja",
+                items: "Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "SiriusStrike96",
+                berechtigt: "Ja",
+                items: "Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Jamal",
+                berechtigt: "Ja",
+                items: "Keine"
+            },
+    
+            {
+                name: "Meowin",
+                berechtigt: "Ja",
+                items: "Schattenpflücker Maske, Blutdurstgürtel"
+            },
+    
+            {
+                name: "N1ghtmar3",
+                berechtigt: "Ja",
+                items: "Helm des Feldgenerals, Gewaltiger Zweihänder von Adentus, Schattenpflücker Maske, Blutdurstgürtel"
+            },
+    
+            {
+                name: "Heimdall",
+                berechtigt: "Ja",
+                items: "Kristalliner Stab des Talus, Schattenpflücker-Hose, Blutdurstgürtel"
+            },
+    
+        ];
+
+        const lootItems = [
+
+            "Morokais Großklinge der Korruption",
+    
+            "Arkan-Schattenhandschuhe",
+    
+            "Anhänger der Abgrundgnade",
+    
+            "Myteriöses Zepter des Königsbaggers",
+    
+            "Heroische Kniebundhose des Widerstands",
+    
+            "Geprägtes Granitband",
+    
+            "Chernobog's Klinge der Enthauptung",
+    
+            "Helm des Feldgenerals",
+    
+            "Arkan - Schattenschuhe",
+    
+            "Gallengetränkter Schleier",
+    
+            "Kristalliner Stab des Talus",
+    
+            "Phantomwolf-Maske",
+    
+            "Plattenpanzer des Gesegneten Tempelritters",
+    
+            "Geschmiedeter Goldarmreif",
+    
+            "Antreibende Armbrüste des Malakar",
+    
+            "Visir des Stoßkommandanten",
+    
+            ""Ebongebrüll" Panzerhandschuhe",
+    
+            "Vergoldetes Höllisches Armband",
+    
+            "Gewaltiger Zweihänder von Adentus",
+    
+            "Schattenpflücker Maske",
+    
+            "Helm des Gesegneten Tempelritters",
+    
+            "Gürtel der Spektralschädel",
+    
+            "Minezerok's Lähmuingsdolche",
+    
+            "Phantomwolf-Stiefel",
+    
+            "Handschuhe des Göttlichen Richters",
+    
+            "Halsreif des Gesegneten Tempelritters",
+    
+            "Destruktive Junobote-Kriegsklinge",
+    
+            "Schattenpflücker-Hose",
+    
+            "Arkan-Schattengewänder",
+    
+            "Umarmung des Abkehrers",
+    
+            "Kowazans Zwilichtdolche",
+    
+            "Eisenschuhe des Stoßkommandanten",
+    
+            "Arkan-Schattenhut",
+    
+            "Kragen der Dezimierung",
+    
+            "Kowazans Armbrüste des Sonnenflimmerns",
+    
+            "Aelons Langbogen der Verjüngung",
+    
+            "Kleidung des Aufgestiegenen Wächters",
+    
+            "Arkan-Schattenhose",
+    
+            "Eingehüllte Münzhalskette",
+    
+            "Entleerendes Schwert des Ahzreil",
+    
+            "Hose der Wirbelnden Essenz",
+    
+            "Hose des Göttlichen Richters",
+    
+            "Mantel des Gesegneten Tempelritters",
+    
+            "Rege Schneide des Cornelius",
+    
+            "Handschuhe der wirbelnden Essenz",
+    
+            "Bekleidung des Göttlichen Richters",
+    
+            "Amulett der Abgrundgnade",
+    
+            "Nirmas Echoschwert",
+    
+            "Hose des Aufgestiegenen Wächters",
+    
+            "Schuhe des Göttlichen Richters",
+    
+            "Schnalle des Hrrschers",
+    
+            "Knorriger Leerstab des Aridus",
+    
+            "Panzerhandschuhe des Feldgenerals",
+    
+            "Stiefel des henkers",
+    
+            "Blutdurstgürtel",
+    
+        ];
+
+        function renderTable() {
+            const tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = ""; // Clear table
+
+            members.forEach((member, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.berechtigt}</td>
+                    <td>${member.items}</td>
+                    <td>
+                        <select id="lootDropdown-${index}">
+                            <option value="">--Item hinzufügen--</option>
+                            ${lootItems.map(item => `<option value="${item}">${item}</option>`).join('')}
+                        </select>
+                        <button onclick="addItem(${index})">Hinzufügen</button>
+                        <button onclick="removeMember(${index})">Entfernen</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function addItem(index) {
+            const selectedItem = document.getElementById(`lootDropdown-${index}`).value;
+            if (selectedItem) {
+                if (!members[index].items.includes(selectedItem)) {
+                    members[index].items = members[index].items === "Keine" ? selectedItem : members[index].items + ", " + selectedItem;
+                    renderTable();
+                } else {
+                    alert("Das Item ist bereits in der Liste.");
+                }
+            } else {
+                alert("Bitte ein Item aus dem Dropdown-Menü auswählen.");
+            }
+        }
+
+        function addMember() {
+            const name = document.getElementById("nameInput").value;
+            const berechtigt = document.getElementById("berechtigtInput").value;
+
+            if (name) {
+                members.push({ name, berechtigt, items: "Keine" });
+                renderTable();
+                document.getElementById("nameInput").value = "";
+            } else {
+                alert("Bitte einen Namen eingeben!");
+            }
+        }
+
+        function removeMember(index) {
+            members.splice(index, 1);
+            renderTable();
+        }
+
+        window.onload = renderTable;
+    </script>
+</head>
+<body>
+    <h1>Gildenmitglieder</h1>
+    <div class="form-container">
+        <input type="text" id="nameInput" placeholder="Name" />
+        <select id="berechtigtInput">
+            <option value="Ja">Ja</option>
+            <option value="Nein">Nein</option>
+        </select>
+        <button onclick="addMember()">Hinzufügen</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Berechtigt</th>
+                <th>Benötigte Items</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+    <a href="index.html">Zurück zur Startseite</a>
+</body>
+</html>
