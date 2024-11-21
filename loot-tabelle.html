@@ -18,10 +18,16 @@
             margin-top: 50px;
             font-size: 2.5rem;
         }
+        select {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+        }
         table {
-            margin: 50px auto;
+            margin: 20px auto;
             border-collapse: collapse;
-            width: 80%;
+            width: 60%;
             color: #ffffff;
         }
         th, td {
@@ -46,293 +52,73 @@
             font-size: 1.2rem;
         }
     </style>
+    <script>
+        // Daten für Boss und Loot
+        const bossLoot = {
+            "Adentus": ['Gewaltiger Zweihänder von Adentus', 'Schattenpflücker Maske', 'Helm des Gesegneten Tempelritters', 'Gürtel der Spektralschädel'],
+            "Aelon der Große": ['Aelons Langbogen der Verjüngung', 'Kleidung des Aufgestiegenen Wächters', 'Arkan-Schattenhose', 'Eingehüllte Münzhalskette'],
+            "Ahzreil": ['Entleerendes Schwert des Ahzreil', 'Hose der Wirbelnden Essenz', 'Hose des Göttlichen Richters', 'Mantel des Gesegneten Tempelritters'],
+            "Aridus": ['Knorriger Leerstab des Aridus', 'Panzerhandschuhe des Feldgenerals', 'Stiefel des henkers', 'Blutdurstgürtel'],
+            "Chernobog": ["Chernobog's Klinge der Enthauptung", 'Helm des Feldgenerals', 'Arkan - Schattenschuhe', 'Gallengetränkter Schleier'],
+            "Cornelius": ['Rege Schneide des Cornelius', 'Handschuhe der wirbelnden Essenz', 'Bekleidung des Göttlichen Richters', 'Amulett der Abgrundgnade'],
+            "Junobote": ['Destruktive Junobote-Kriegsklinge', 'Schattenpflücker-Hose', 'Arkan-Schattengewänder', 'Umarmung des Abkehrers'],
+            "Kowazan": ['Kowazans Zwilichtdolche', 'Eisenschuhe des Stoßkommandanten', 'Arkan-Schattenhut', 'Kragen der Dezimierung'],
+            "Kowazan Nacht": ['Kowazans Armbrüste des Sonnenflimmerns'],
+            "Königsbagger": ['Myteriöses Zepter des Königsbaggers', 'Heroische Kniebundhose des Widerstands', 'Geprägtes Granitband'],
+            "Malakar": ['Antreibende Armbrüste des Malakar', 'Visir des Stoßkommandanten', '"Ebongebrüll" Panzerhandschuhe', 'Vergoldetes Höllisches Armband'],
+            "Minezerok": ["Minezerok's Lähmuingsdolche", 'Phantomwolf-Stiefel', 'Handschuhe des Göttlichen Richters', 'Halsreif des Gesegneten Tempelritters'],
+            "Morokai": ['Morokais Großklinge der Korruption', 'Arkan-Schattenhandschuhe', 'Anhänger der Abgrundgnade'],
+            "Nirma": ['Nirmas Echoschwert', 'Hose des Aufgestiegenen Wächters', 'Schuhe des Göttlichen Richters', 'Schnalle des Hrrschers'],
+            "Talus": ['Kristalliner Stab des Talus', 'Phantomwolf-Maske', 'Plattenpanzer des Gesegneten Tempelritters', 'Geschmiedeter Goldarmreif'],
+
+        };
+
+        function showLoot() {
+            const selectedBoss = document.getElementById("bossDropdown").value;
+            const lootTable = document.getElementById("lootTableBody");
+            lootTable.innerHTML = ""; // Reset der Tabelle
+
+            if (selectedBoss && bossLoot[selectedBoss]) {
+                bossLoot[selectedBoss].forEach(item => {
+                    const row = document.createElement("tr");
+                    const cell = document.createElement("td");
+                    cell.textContent = item;
+                    row.appendChild(cell);
+                    lootTable.appendChild(row);
+                });
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>Loot Tabelle</h1>
+    <label for="bossDropdown">Wähle einen Boss:</label>
+    <select id="bossDropdown" onchange="showLoot()">
+        <option value="">-- Bitte Boss auswählen --</option>
+        <option value="Morokai">Morokai</option>
+        <option value="Königsbagger">Königsbagger</option>
+        <option value="Chernobog">Chernobog</option>
+        <option value="Talus">Talus</option>
+        <option value="Malakar">Malakar</option>
+        <option value="Adentus">Adentus</option>
+        <option value="Minezerok">Minezerok</option>
+        <option value="Junobote">Junobote</option>
+        <option value="Kowazan">Kowazan</option>
+        <option value="Kowazan Nacht">Kowazan Nacht</option>
+        <option value="Aelon der Große">Aelon der Große</option>
+        <option value="Ahzreil">Ahzreil</option>
+        <option value="Cornelius">Cornelius</option>
+        <option value="Nirma">Nirma</option>
+        <option value="Aridus">Aridus</option>
+
+    </select>
     <table>
         <thead>
             <tr>
-                <th>Boss</th>
                 <th>Loot</th>
             </tr>
         </thead>
-        <tbody>
-
-            <tr>
-                <td>Morokai</td>
-                <td>Morokais Großklinge der Korruption</td>
-            </tr>
-    
-            <tr>
-                <td>Morokai</td>
-                <td>Arkan-Schattenhandschuhe</td>
-            </tr>
-    
-            <tr>
-                <td>Morokai</td>
-                <td>Anhänger der Abgrundgnade</td>
-            </tr>
-    
-            <tr>
-                <td>Königsbagger</td>
-                <td>Myteriöses Zepter des Königsbaggers</td>
-            </tr>
-    
-            <tr>
-                <td>Königsbagger</td>
-                <td>Heroische Kniebundhose des Widerstands</td>
-            </tr>
-    
-            <tr>
-                <td>Königsbagger</td>
-                <td>Geprägtes Granitband</td>
-            </tr>
-    
-            <tr>
-                <td>Chernobog</td>
-                <td>Chernobog's Klinge der Enthauptung</td>
-            </tr>
-    
-            <tr>
-                <td>Chernobog</td>
-                <td>Helm des Feldgenerals</td>
-            </tr>
-    
-            <tr>
-                <td>Chernobog</td>
-                <td>Arkan - Schattenschuhe</td>
-            </tr>
-    
-            <tr>
-                <td>Chernobog</td>
-                <td>Gallengetränkter Schleier</td>
-            </tr>
-    
-            <tr>
-                <td>Talus</td>
-                <td>Kristalliner Stab des Talus</td>
-            </tr>
-    
-            <tr>
-                <td>Talus</td>
-                <td>Phantomwolf-Maske</td>
-            </tr>
-    
-            <tr>
-                <td>Talus</td>
-                <td>Plattenpanzer des Gesegneten Tempelritters</td>
-            </tr>
-    
-            <tr>
-                <td>Talus</td>
-                <td>Geschmiedeter Goldarmreif</td>
-            </tr>
-    
-            <tr>
-                <td>Malakar</td>
-                <td>Antreibende Armbrüste des Malakar</td>
-            </tr>
-    
-            <tr>
-                <td>Malakar</td>
-                <td>Visir des Stoßkommandanten</td>
-            </tr>
-    
-            <tr>
-                <td>Malakar</td>
-                <td>"Ebongebrüll" Panzerhandschuhe</td>
-            </tr>
-    
-            <tr>
-                <td>Malakar</td>
-                <td>Vergoldetes Höllisches Armband</td>
-            </tr>
-    
-            <tr>
-                <td>Adentus</td>
-                <td>Gewaltiger Zweihänder von Adentus</td>
-            </tr>
-    
-            <tr>
-                <td>Adentus</td>
-                <td>Schattenpflücker Maske</td>
-            </tr>
-    
-            <tr>
-                <td>Adentus</td>
-                <td>Helm des Gesegneten Tempelritters</td>
-            </tr>
-    
-            <tr>
-                <td>Adentus</td>
-                <td>Gürtel der Spektralschädel</td>
-            </tr>
-    
-            <tr>
-                <td>Minezerok</td>
-                <td>Minezerok's Lähmuingsdolche</td>
-            </tr>
-    
-            <tr>
-                <td>Minezerok</td>
-                <td>Phantomwolf-Stiefel</td>
-            </tr>
-    
-            <tr>
-                <td>Minezerok</td>
-                <td>Handschuhe des Göttlichen Richters</td>
-            </tr>
-    
-            <tr>
-                <td>Minezerok</td>
-                <td>Halsreif des Gesegneten Tempelritters</td>
-            </tr>
-    
-            <tr>
-                <td>Junobote</td>
-                <td>Destruktive Junobote-Kriegsklinge</td>
-            </tr>
-    
-            <tr>
-                <td>Junobote</td>
-                <td>Schattenpflücker-Hose</td>
-            </tr>
-    
-            <tr>
-                <td>Junobote</td>
-                <td>Arkan-Schattengewänder</td>
-            </tr>
-    
-            <tr>
-                <td>Junobote</td>
-                <td>Umarmung des Abkehrers</td>
-            </tr>
-    
-            <tr>
-                <td>Kowazan</td>
-                <td>Kowazans Zwilichtdolche</td>
-            </tr>
-    
-            <tr>
-                <td>Kowazan</td>
-                <td>Eisenschuhe des Stoßkommandanten</td>
-            </tr>
-    
-            <tr>
-                <td>Kowazan</td>
-                <td>Arkan-Schattenhut</td>
-            </tr>
-    
-            <tr>
-                <td>Kowazan</td>
-                <td>Kragen der Dezimierung</td>
-            </tr>
-    
-            <tr>
-                <td>Kowazan Nacht</td>
-                <td>Kowazans Armbrüste des Sonnenflimmerns</td>
-            </tr>
-    
-            <tr>
-                <td>Aelon der Große</td>
-                <td>Aelons Langbogen der Verjüngung</td>
-            </tr>
-    
-            <tr>
-                <td>Aelon der Große</td>
-                <td>Kleidung des Aufgestiegenen Wächters</td>
-            </tr>
-    
-            <tr>
-                <td>Aelon der Große</td>
-                <td>Arkan-Schattenhose</td>
-            </tr>
-    
-            <tr>
-                <td>Aelon der Große</td>
-                <td>Eingehüllte Münzhalskette</td>
-            </tr>
-    
-            <tr>
-                <td>Ahzreil</td>
-                <td>Entleerendes Schwert des Ahzreil</td>
-            </tr>
-    
-            <tr>
-                <td>Ahzreil</td>
-                <td>Hose der Wirbelnden Essenz</td>
-            </tr>
-    
-            <tr>
-                <td>Ahzreil</td>
-                <td>Hose des Göttlichen Richters</td>
-            </tr>
-    
-            <tr>
-                <td>Ahzreil</td>
-                <td>Mantel des Gesegneten Tempelritters</td>
-            </tr>
-    
-            <tr>
-                <td>Cornelius</td>
-                <td>Rege Schneide des Cornelius</td>
-            </tr>
-    
-            <tr>
-                <td>Cornelius</td>
-                <td>Handschuhe der wirbelnden Essenz</td>
-            </tr>
-    
-            <tr>
-                <td>Cornelius</td>
-                <td>Bekleidung des Göttlichen Richters</td>
-            </tr>
-    
-            <tr>
-                <td>Cornelius</td>
-                <td>Amulett der Abgrundgnade</td>
-            </tr>
-    
-            <tr>
-                <td>Nirma</td>
-                <td>Nirmas Echoschwert</td>
-            </tr>
-    
-            <tr>
-                <td>Nirma</td>
-                <td>Hose des Aufgestiegenen Wächters</td>
-            </tr>
-    
-            <tr>
-                <td>Nirma</td>
-                <td>Schuhe des Göttlichen Richters</td>
-            </tr>
-    
-            <tr>
-                <td>Nirma</td>
-                <td>Schnalle des Hrrschers</td>
-            </tr>
-    
-            <tr>
-                <td>Aridus</td>
-                <td>Knorriger Leerstab des Aridus</td>
-            </tr>
-    
-            <tr>
-                <td>Aridus</td>
-                <td>Panzerhandschuhe des Feldgenerals</td>
-            </tr>
-    
-            <tr>
-                <td>Aridus</td>
-                <td>Stiefel des henkers</td>
-            </tr>
-    
-            <tr>
-                <td>Aridus</td>
-                <td>Blutdurstgürtel</td>
-            </tr>
-    
+        <tbody id="lootTableBody">
         </tbody>
     </table>
     <a href="index.html">Zurück zur Startseite</a>
