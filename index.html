@@ -34,55 +34,43 @@
         button:hover {
             background-color: #e03e00;
         }
-        canvas {
-            margin: 30px auto;
-            display: block;
-            visibility: hidden;
+        .list-container {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #ff4500;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const itemData = {            "Blutdurstgürtel": 16,
-            "Schattenpflücker-Hose": 10,
-            "Gewaltiger Zweihänder von Adentus": 8,
-            "Helm des Feldgenerals": 7,
-            "Schattenpflücker Maske": 7,
-            "Panzerhandschuhe des Feldgenerals": 6,
-            "Umarmung des Abkehrers": 6,
-            "Kristalliner Stab des Talus": 6,
-            "Nirmas Echoschwert": 4,
-            "Eisenschuhe des Stoßkommandanten": 4,
+        const topItems = [
+            "Blutdurstgürtel - 16 Spieler benötigen es",
+            "Schattenpflücker-Hose - 10 Spieler benötigen es",
+            "Gewaltiger Zweihänder von Adentus - 8 Spieler benötigen es",
+            "Helm des Feldgenerals - 7 Spieler benötigen es",
+            "Schattenpflücker Maske - 7 Spieler benötigen es",
+            "Panzerhandschuhe des Feldgenerals - 6 Spieler benötigen es",
+            "Umarmung des Abkehrers - 6 Spieler benötigen es",
+            "Kristalliner Stab des Talus - 6 Spieler benötigen es",
+            "Nirmas Echoschwert - 4 Spieler benötigen es",
+            "Eisenschuhe des Stoßkommandanten - 4 Spieler benötigen es",
 
-        }};
+        ];
 
-        function generateItemChart() {
-            const labels = Object.keys(itemData);
-            const data = Object.values(itemData);
+        function displayTopItems() {
+            const listContainer = document.getElementById("topItemsList");
+            listContainer.innerHTML = "";
 
-            const ctx = document.getElementById("itemChart").getContext("2d");
-            new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: "Anzahl der Spieler, die das Item benötigen",
-                        data: data,
-                        backgroundColor: "rgba(54, 162, 235, 0.6)",
-                        borderColor: "rgba(54, 162, 235, 1)",
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
+            topItems.forEach(item => {
+                const listItem = document.createElement("li");
+                listItem.textContent = item;
+                listContainer.appendChild(listItem);
             });
-
-            // Make the canvas visible after generating the chart
-            document.getElementById("itemChart").style.visibility = "visible";
         }
     </script>
 </head>
@@ -91,8 +79,12 @@
     <div class="button-container">
         <button onclick="location.href='loot-tabelle-dropdown.html'">Loot Tabelle</button>
         <button onclick="location.href='gildenmitglieder_loot_dropdown.html'">Gildenmitglieder</button>
-        <button onclick="generateItemChart()">Diagramm der Top-Items erstellen</button>
+        <button onclick="displayTopItems()">Zeige die Top-Items-Liste</button>
     </div>
-    <canvas id="itemChart" width="400" height="200"></canvas>
+    <div class="list-container">
+        <ul id="topItemsList">
+            <!-- Die Liste wird hier angezeigt -->
+        </ul>
+    </div>
 </body>
 </html>
