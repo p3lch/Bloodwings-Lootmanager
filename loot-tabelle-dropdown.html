@@ -54,3 +54,72 @@
     </style>
     <script>
         const bossLoot = {
+            "Adentus": ['Gewaltiger Zweihänder von Adentus', 'Schattenpflücker Maske', 'Helm des Gesegneten Tempelritters', 'Gürtel der Spektralschädel'],
+            "Aelon der Große": ['Aelons Langbogen der Verjüngung', 'Kleidung des Aufgestiegenen Wächters', 'Arkan-Schattenhose', 'Eingehüllte Münzhalskette'],
+            "Ahzreil": ['Entleerendes Schwert des Ahzreil', 'Hose der Wirbelnden Essenz', 'Hose des Göttlichen Richters', 'Mantel des Gesegneten Tempelritters'],
+            "Aridus": ['Knorriger Leerstab des Aridus', 'Panzerhandschuhe des Feldgenerals', 'Stiefel des henkers', 'Blutdurstgürtel'],
+            "Chernobog": ["Chernobog's Klinge der Enthauptung", 'Helm des Feldgenerals', 'Arkan - Schattenschuhe', 'Gallengetränkter Schleier'],
+            "Cornelius": ['Rege Schneide des Cornelius', 'Handschuhe der wirbelnden Essenz', 'Bekleidung des Göttlichen Richters', 'Amulett der Abgrundgnade'],
+            "Junobote": ['Destruktive Junobote-Kriegsklinge', 'Schattenpflücker-Hose', 'Arkan-Schattengewänder', 'Umarmung des Abkehrers'],
+            "Kowazan": ['Kowazans Zwilichtdolche', 'Eisenschuhe des Stoßkommandanten', 'Arkan-Schattenhut', 'Kragen der Dezimierung'],
+            "Kowazan Nacht": ['Kowazans Armbrüste des Sonnenflimmerns'],
+            "Königsbagger": ['Myteriöses Zepter des Königsbaggers', 'Heroische Kniebundhose des Widerstands', 'Geprägtes Granitband'],
+            "Malakar": ['Antreibende Armbrüste des Malakar', 'Visir des Stoßkommandanten', '"Ebongebrüll" Panzerhandschuhe', 'Vergoldetes Höllisches Armband'],
+            "Minezerok": ["Minezerok's Lähmuingsdolche", 'Phantomwolf-Stiefel', 'Handschuhe des Göttlichen Richters', 'Halsreif des Gesegneten Tempelritters'],
+            "Morokai": ['Morokais Großklinge der Korruption', 'Arkan-Schattenhandschuhe', 'Anhänger der Abgrundgnade'],
+            "Nirma": ['Nirmas Echoschwert', 'Hose des Aufgestiegenen Wächters', 'Schuhe des Göttlichen Richters', 'Schnalle des Hrrschers'],
+            "Talus": ['Kristalliner Stab des Talus', 'Phantomwolf-Maske', 'Plattenpanzer des Gesegneten Tempelritters', 'Geschmiedeter Goldarmreif'],
+
+        };
+
+        function showLoot() {
+            const selectedBoss = document.getElementById("bossDropdown").value;
+            const lootTable = document.getElementById("lootTableBody");
+            lootTable.innerHTML = ""; // Reset der Tabelle
+
+            if (selectedBoss && bossLoot[selectedBoss]) {
+                bossLoot[selectedBoss].forEach(item => {
+                    const row = document.createElement("tr");
+                    const cell = document.createElement("td");
+                    cell.textContent = item;
+                    row.appendChild(cell);
+                    lootTable.appendChild(row);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Loot Tabelle</h1>
+    <label for="bossDropdown">Wähle einen Boss:</label>
+    <select id="bossDropdown" onchange="showLoot()">
+        <option value="">-- Bitte Boss auswählen --</option>
+        <option value="Morokai">Morokai</option>
+        <option value="Königsbagger">Königsbagger</option>
+        <option value="Chernobog">Chernobog</option>
+        <option value="Talus">Talus</option>
+        <option value="Malakar">Malakar</option>
+        <option value="Adentus">Adentus</option>
+        <option value="Minezerok">Minezerok</option>
+        <option value="Junobote">Junobote</option>
+        <option value="Kowazan">Kowazan</option>
+        <option value="Kowazan Nacht">Kowazan Nacht</option>
+        <option value="Aelon der Große">Aelon der Große</option>
+        <option value="Ahzreil">Ahzreil</option>
+        <option value="Cornelius">Cornelius</option>
+        <option value="Nirma">Nirma</option>
+        <option value="Aridus">Aridus</option>
+
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <th>Loot</th>
+            </tr>
+        </thead>
+        <tbody id="lootTableBody">
+        </tbody>
+    </table>
+    <a href="index.html">Zurück zur Startseite</a>
+</body>
+</html>
