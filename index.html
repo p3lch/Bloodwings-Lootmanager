@@ -41,79 +41,34 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const bossData = {
-            "Adentus": 1,
-            "Adentus": 1,
-            "Adentus": 1,
-            "Adentus": 1,
-            "Aelon der Große": 1,
-            "Aelon der Große": 1,
-            "Aelon der Große": 1,
-            "Aelon der Große": 1,
-            "Ahzreil": 1,
-            "Ahzreil": 1,
-            "Ahzreil": 1,
-            "Ahzreil": 1,
-            "Aridus": 1,
-            "Aridus": 1,
-            "Aridus": 1,
-            "Aridus": 1,
-            "Chernobog": 1,
-            "Chernobog": 1,
-            "Chernobog": 1,
-            "Chernobog": 1,
-            "Cornelius": 1,
-            "Cornelius": 1,
-            "Cornelius": 1,
-            "Cornelius": 1,
-            "Junobote": 1,
-            "Junobote": 1,
-            "Junobote": 1,
-            "Junobote": 1,
-            "Kowazan": 1,
-            "Kowazan": 1,
-            "Kowazan": 1,
-            "Kowazan": 1,
-            "Kowazan Nacht": 1,
-            "Königsbagger": 1,
-            "Königsbagger": 1,
-            "Königsbagger": 1,
-            "Malakar": 1,
-            "Malakar": 1,
-            "Malakar": 1,
-            "Malakar": 1,
-            "Minezerok": 1,
-            "Minezerok": 1,
-            "Minezerok": 1,
-            "Minezerok": 1,
-            "Morokai": 1,
-            "Morokai": 1,
-            "Morokai": 1,
-            "Nirma": 1,
-            "Nirma": 1,
-            "Nirma": 1,
-            "Nirma": 1,
-            "Talus": 1,
-            "Talus": 1,
-            "Talus": 1,
-            "Talus": 1,
+        const itemData = {
+            "Blutdurstgürtel (Boss: Aridus)": 16,
+            "Schattenpflücker-Hose (Boss: Junobote)": 10,
+            "Gewaltiger Zweihänder von Adentus (Boss: Adentus)": 8,
+            "Schattenpflücker Maske (Boss: Adentus)": 7,
+            "Helm des Feldgenerals (Boss: Chernobog)": 7,
+            "Panzerhandschuhe des Feldgenerals (Boss: Aridus)": 6,
+            "Umarmung des Abkehrers (Boss: Junobote)": 6,
+            "Kristalliner Stab des Talus (Boss: Talus)": 6,
+            "Eisenschuhe des Stoßkommandanten (Boss: Kowazan)": 4,
+            "Phantomwolf-Maske (Boss: Talus)": 4,
 
-        };
+        }};
 
-        function generateChart() {
-            const labels = Object.keys(bossData);
-            const data = Object.values(bossData);
+        function generateItemChart() {
+            const labels = Object.keys(itemData);
+            const data = Object.values(itemData);
 
-            const ctx = document.getElementById("bossChart").getContext("2d");
+            const ctx = document.getElementById("itemChart").getContext("2d");
             new Chart(ctx, {
                 type: "bar",
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: "Anzahl der benötigten Items",
+                        label: "Anzahl der Spieler, die das Item benötigen",
                         data: data,
-                        backgroundColor: "rgba(255, 69, 0, 0.6)",
-                        borderColor: "rgba(255, 69, 0, 1)",
+                        backgroundColor: "rgba(54, 162, 235, 0.6)",
+                        borderColor: "rgba(54, 162, 235, 1)",
                         borderWidth: 1
                     }]
                 },
@@ -133,8 +88,8 @@
     <div class="button-container">
         <button onclick="location.href='loot-tabelle-dropdown.html'">Loot Tabelle</button>
         <button onclick="location.href='gildenmitglieder_loot_dropdown.html'">Gildenmitglieder</button>
-        <button onclick="generateChart()">Diagramm erstellen</button>
+        <button onclick="generateItemChart()">Diagramm der Top-Items erstellen</button>
     </div>
-    <canvas id="bossChart" width="400" height="200"></canvas>
+    <canvas id="itemChart" width="400" height="200"></canvas>
 </body>
 </html>
