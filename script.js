@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Fetch the list from GitHub
     async function fetchListFromGitHub() {
         try {
-            const response = await fetch('https://raw.githubusercontent.com/<p3lch>/<Bloodwings-Lootmanager>/main/saved_list.json');
+            const response = await fetch('https://raw.githubusercontent.com/<USERNAME>/<REPO-NAME>/main/saved_list.json');
             if (response.ok) {
                 savedItems = await response.json();
+                listContainer.innerHTML = ''; // Clear current list
                 savedItems.forEach(item => addItemToList(item));
             } else {
                 console.error('Error fetching the list from GitHub:', response.statusText);
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    // Add new item when button is clicked
+    // Add new item to the list (only updates UI, not GitHub directly)
     addButton.addEventListener('click', function () {
         const inputValue = inputField.value.trim();
         if (inputValue) {
