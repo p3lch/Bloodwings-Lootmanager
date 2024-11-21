@@ -1,15 +1,25 @@
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     const inputField = document.getElementById('inputField');
     const addButton = document.getElementById('addButton');
     const downloadButton = document.getElementById('downloadButton');
     const listContainer = document.getElementById('listContainer');
+    let savedItems = [];
 
-    // Load saved items from LocalStorage on page load
-    const savedItems = JSON.parse(localStorage.getItem('savedList')) || [];
-    savedItems.forEach(item => {
-        addItemToList(item);
-    });
+    // Fetch the list from GitHub
+    async function fetchListFromGitHub() {
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/<USERNAME>/<REPO-NAME>/main/saved_list.json');
+            if (response.ok) {
+                savedItems = await response.json();
+                savedItems.forEach(item => addItemToList(item));
+            } else {
+                console.error('Error fetching the list from GitHub:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching the list from GitHub:', error);
+        }
+    }
 
     // Add new item when button is clicked
     addButton.addEventListener('click', function () {
@@ -17,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (inputValue) {
             addItemToList(inputValue);
             savedItems.push(inputValue);
-            localStorage.setItem('savedList', JSON.stringify(savedItems));
             inputField.value = ''; // Clear the input field
         }
     });
@@ -37,4 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         listItem.textContent = text;
         listContainer.appendChild(listItem);
     }
+
+    // Load the list from GitHub
+    await fetchListFromGitHub();
 });
