@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Fetch the list from GitHub
     async function fetchListFromGitHub() {
         try {
-            const response = await fetch('https://raw.githubusercontent.com/<USERNAME>/<REPO-NAME>/main/saved_list.json');
+            const response = await fetch('https://raw.githubusercontent.com/<P3lch>/<Bloodwings-Lootmanager>/main/saved_list.json');
             if (response.ok) {
                 savedItems = await response.json();
                 savedItems.forEach(item => addItemToList(item));
