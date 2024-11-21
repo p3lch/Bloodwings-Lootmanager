@@ -34,17 +34,107 @@
         button:hover {
             background-color: #e03e00;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
+        canvas {
+            margin: 30px auto;
+            display: block;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const bossData = {
+            "Adentus": 1,
+            "Adentus": 1,
+            "Adentus": 1,
+            "Adentus": 1,
+            "Aelon der Große": 1,
+            "Aelon der Große": 1,
+            "Aelon der Große": 1,
+            "Aelon der Große": 1,
+            "Ahzreil": 1,
+            "Ahzreil": 1,
+            "Ahzreil": 1,
+            "Ahzreil": 1,
+            "Aridus": 1,
+            "Aridus": 1,
+            "Aridus": 1,
+            "Aridus": 1,
+            "Chernobog": 1,
+            "Chernobog": 1,
+            "Chernobog": 1,
+            "Chernobog": 1,
+            "Cornelius": 1,
+            "Cornelius": 1,
+            "Cornelius": 1,
+            "Cornelius": 1,
+            "Junobote": 1,
+            "Junobote": 1,
+            "Junobote": 1,
+            "Junobote": 1,
+            "Kowazan": 1,
+            "Kowazan": 1,
+            "Kowazan": 1,
+            "Kowazan": 1,
+            "Kowazan Nacht": 1,
+            "Königsbagger": 1,
+            "Königsbagger": 1,
+            "Königsbagger": 1,
+            "Malakar": 1,
+            "Malakar": 1,
+            "Malakar": 1,
+            "Malakar": 1,
+            "Minezerok": 1,
+            "Minezerok": 1,
+            "Minezerok": 1,
+            "Minezerok": 1,
+            "Morokai": 1,
+            "Morokai": 1,
+            "Morokai": 1,
+            "Nirma": 1,
+            "Nirma": 1,
+            "Nirma": 1,
+            "Nirma": 1,
+            "Talus": 1,
+            "Talus": 1,
+            "Talus": 1,
+            "Talus": 1,
+
+        };
+
+        function generateChart() {
+            const labels = Object.keys(bossData);
+            const data = Object.values(bossData);
+
+            const ctx = document.getElementById("bossChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Anzahl der benötigten Items",
+                        data: data,
+                        backgroundColor: "rgba(255, 69, 0, 0.6)",
+                        borderColor: "rgba(255, 69, 0, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <h1>Bloodwings - Lootmanager</h1>
     <div class="button-container">
         <button onclick="location.href='loot-tabelle-dropdown.html'">Loot Tabelle</button>
         <button onclick="location.href='gildenmitglieder_loot_dropdown.html'">Gildenmitglieder</button>
+        <button onclick="generateChart()">Diagramm erstellen</button>
     </div>
+    <canvas id="bossChart" width="400" height="200"></canvas>
 </body>
 </html>
