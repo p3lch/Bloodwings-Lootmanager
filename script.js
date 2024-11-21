@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Fetch the list from GitHub
     async function fetchListFromGitHub() {
         try {
-            const response = await fetch('https://raw.githubusercontent.com/<p3lch>/<Bloodwings-Lootmanager>/main/saved_list.json');
+            const response = await fetch(`https://raw.githubusercontent.com/p3lch/Bloodwings-Lootmanager/main/saved_list.json?timestamp=${new Date().getTime()}`);
             if (response.ok) {
                 savedItems = await response.json();
                 listContainer.innerHTML = ''; // Clear current list
