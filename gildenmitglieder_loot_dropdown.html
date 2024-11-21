@@ -49,6 +49,14 @@
         .item-container {
             margin-bottom: 5px;
         }
+        .form-container {
+            margin: 20px;
+        }
+        .form-container input, .form-container select, .form-container button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
     </style>
     <script>
         function removeItem(memberIndex, itemIndex) {
@@ -75,23 +83,93 @@
                 alert("Bitte ein Item aus dem Dropdown-Menü auswählen.");
             }
         }
+
+        function addMember() {
+            const name = document.getElementById("nameInput").value;
+            const permission = document.getElementById("permissionInput").value;
+            const firstItem = document.getElementById("firstItemInput").value;
+
+            if (!name) {
+                alert("Bitte einen Namen eingeben.");
+                return;
+            }
+
+            const tableBody = document.getElementById("tableBody");
+            const memberIndex = tableBody.childElementCount;
+            const newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>${name}</td>
+                <td>
+                    <select id="permissionDropdown-${memberIndex}">
+                        <option value="Ja" ${permission === "Ja" ? "selected" : ""}>Ja</option>
+                        <option value="Nein" ${permission === "Nein" ? "selected" : ""}>Nein</option>
+                    </select>
+                </td>
+                <td>
+                    <div id="itemList-${memberIndex}">
+                        ${firstItem ? `
+                            <div class="item-container" id="item-${memberIndex}-0">
+                                <span>• ${firstItem}</span>
+                                <button onclick="removeItem(${memberIndex}, 0)">Löschen</button>
+                            </div>
+                        ` : "Keine"}
+                    </div>
+                    <div>
+                        <select id="lootDropdown-${memberIndex}">
+                            <option value="">--Item hinzufügen--</option>
+                            ${lootItems.map(item => `<option value="${item}">${item}</option>`).join('')}
+                        </select>
+                        <button onclick="addItem(${memberIndex})">Hinzufügen</button>
+                    </div>
+                </td>
+                <td>
+                    <button onclick="removeMember(${memberIndex})">Mitglied löschen</button>
+                </td>
+            `;
+            tableBody.appendChild(newRow);
+
+            document.getElementById("nameInput").value = "";
+            document.getElementById("firstItemInput").value = "";
+        }
+
+        function removeMember(index) {
+            const tableBody = document.getElementById("tableBody");
+            const row = tableBody.children[index];
+            tableBody.removeChild(row);
+        }
     </script>
 </head>
 <body>
     <h1>Gildenmitglieder</h1>
+    <div class="form-container">
+        <input type="text" id="nameInput" placeholder="Name" />
+        <select id="permissionInput">
+            <option value="Ja">Ja</option>
+            <option value="Nein">Nein</option>
+        </select>
+        <input type="text" id="firstItemInput" placeholder="Erstes Item (optional)" />
+        <button onclick="addMember()">Mitglied hinzufügen</button>
+    </div>
     <table>
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Berechtigt</th>
                 <th>Benötigte Items</th>
+                <th>Aktionen</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
 
         <tr>
             <td>Wiesel</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-0">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-0">
     
@@ -229,11 +307,19 @@
                     <button onclick="addItem(0)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(0)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>JuppTheGreat</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-1">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-1">
     
@@ -371,11 +457,19 @@
                     <button onclick="addItem(1)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(1)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Yoria</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-2">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-2">
     
@@ -513,11 +607,19 @@
                     <button onclick="addItem(2)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(2)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Smokinggun</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-3">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-3">
     
@@ -645,11 +747,19 @@
                     <button onclick="addItem(3)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(3)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Kuro88</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-4">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-4">
     
@@ -782,11 +892,19 @@
                     <button onclick="addItem(4)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(4)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Charaktername</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-5">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-5">
     
@@ -914,11 +1032,19 @@
                     <button onclick="addItem(5)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(5)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Narah</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-6">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-6">
     
@@ -1061,11 +1187,19 @@
                     <button onclick="addItem(6)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(6)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Moe</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-7">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-7">
     
@@ -1208,11 +1342,19 @@
                     <button onclick="addItem(7)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(7)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Nelliel</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-8">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-8">
     
@@ -1350,11 +1492,19 @@
                     <button onclick="addItem(8)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(8)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Fabfrucht</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-9">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-9">
     
@@ -1497,11 +1647,19 @@
                     <button onclick="addItem(9)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(9)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Wotan1988</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-10">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-10">
     
@@ -1649,11 +1807,19 @@
                     <button onclick="addItem(10)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(10)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Fateles</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-11">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-11">
     
@@ -1801,11 +1967,19 @@
                     <button onclick="addItem(11)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(11)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Anubis</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-12">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-12">
     
@@ -1933,11 +2107,19 @@
                     <button onclick="addItem(12)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(12)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Falleen DD</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-13">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-13">
     
@@ -2080,11 +2262,19 @@
                     <button onclick="addItem(13)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(13)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Undomiel</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-14">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-14">
     
@@ -2227,11 +2417,19 @@
                     <button onclick="addItem(14)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(14)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>SVN68</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-15">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-15">
     
@@ -2369,11 +2567,19 @@
                     <button onclick="addItem(15)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(15)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Rubinstein84</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-16">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-16">
     
@@ -2511,11 +2717,19 @@
                     <button onclick="addItem(16)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(16)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Sadori</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-17">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-17">
     
@@ -2648,11 +2862,19 @@
                     <button onclick="addItem(17)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(17)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>TctNarga</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-18">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-18">
     
@@ -2795,11 +3017,19 @@
                     <button onclick="addItem(18)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(18)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Varccas</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-19">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-19">
     
@@ -2942,11 +3172,19 @@
                     <button onclick="addItem(19)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(19)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Shankz</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-20">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-20">
     
@@ -3094,11 +3332,19 @@
                     <button onclick="addItem(20)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(20)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Acidwars</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-21">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-21">
     
@@ -3241,11 +3487,19 @@
                     <button onclick="addItem(21)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(21)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Demolux</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-22">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-22">
     
@@ -3378,11 +3632,19 @@
                     <button onclick="addItem(22)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(22)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>SiriusStrike96</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-23">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-23">
     
@@ -3515,11 +3777,19 @@
                     <button onclick="addItem(23)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(23)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Jamal</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-24">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-24">
     
@@ -3642,11 +3912,19 @@
                     <button onclick="addItem(24)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(24)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Meowin</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-25">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-25">
     
@@ -3779,11 +4057,19 @@
                     <button onclick="addItem(25)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(25)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>N1ghtmar3</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-26">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-26">
     
@@ -3926,11 +4212,19 @@
                     <button onclick="addItem(26)">Hinzufügen</button>
                 </div>
             </td>
+            <td>
+                <button onclick="removeMember(26)">Mitglied löschen</button>
+            </td>
         </tr>
     
         <tr>
             <td>Heimdall</td>
-            <td>Ja</td>
+            <td>
+                <select id="permissionDropdown-27">
+                    <option value="Ja" selected>Ja</option>
+                    <option value="Nein" >Nein</option>
+                </select>
+            </td>
             <td>
                 <div id="itemList-27">
     
@@ -4067,6 +4361,9 @@
                     </select>
                     <button onclick="addItem(27)">Hinzufügen</button>
                 </div>
+            </td>
+            <td>
+                <button onclick="removeMember(27)">Mitglied löschen</button>
             </td>
         </tr>
     
