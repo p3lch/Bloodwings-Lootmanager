@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gildenmitglieder</title>
+    <script>
+        async function loadMembers() {
+            try {
+                const response = await fetch('gildenmitglieder.json');
+                if (!response.ok) throw new Error('JSON-Datei konnte nicht geladen werden.');
+                const members = await response.json();
+
+                const tableBody = document.getElementById("tableBody");
+                tableBody.innerHTML = "";
+
+                members.forEach((member, index) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${member.name}</td>
+                        <td>
+                            <select id="permissionDropdown-${index}">
+                                <option value="Ja" ${member.permission === "Ja" ? "selected" : ""}>Ja</option>
+                                <option value="Nein" ${member.permission === "Nein" ? "selected" : ""}>Nein</option>
+                            </select>
+                        </td>
+                        <td>
+                            <div id="itemList-${index}">
+                                ${member.items.map((item, itemIndex) => `
+                                    <div class="item-container" id="item-${index}-${itemIndex}">
+                                        <span>• ${item}</span>
+                                        <button onclick="removeItem(${index}, ${itemIndex})">Löschen</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div>
+                                <select id="lootDropdown-${index}">
+                                    <option value="">--Item hinzufügen--</option>
+                                </select>
+                                <button onclick="addItem(${index})">Hinzufügen</button>
+                            </div>
+                        </td>
+                        <td>
+                            <button onclick="removeMember(${index})">Mitglied löschen</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Fehler beim Laden der JSON-Datei:', error);
+                alert('Die Mitgliederliste konnte nicht geladen werden.');
+            }
+        }
+
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+
+        function exportData() {
+            const members = [];
+            document.querySelectorAll('#tableBody tr').forEach((row, index) => {
+                const name = row.children[0].textContent.trim();
+                const permission = row.querySelector(`#permissionDropdown-${index}`).value;
+                const items = Array.from(row.querySelectorAll(`#itemList-${index} .item-container span`))
+                    .map(span => span.textContent.replace('• ', '').trim());
+                members.push({ name, permission, items });
+            });
+
+            downloadJSON(members, 'gildenmitglieder.json');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMembers);
+    </script>
+</head>
+<body>
+    <h1>Gildenmitglieder</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Berechtigt</th>
+                <th>Benötigte Items</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+    <button onclick="exportData()">JSON-Datei herunterladen</button>
+</body>
+</html>
